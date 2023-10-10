@@ -4,22 +4,142 @@
     <title>MyBlog</title>
     <script src="https://unpkg.com/vue@3.3.4"></script>
     <script src="index.js"></script>
+    <style>
+        .error {
+            border: red solid 1px;
+            color: red;
+        }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </header>
 
 <body>
+    <div id="app2"></div>
     <div id="app">
-        <h1>{{ message }}</h1>
-        <input v-model="message"><br/>
-        單價: {{ price }}, 數量: {{ quantity }}, 總金額共: {{ price * quantity }}<br />
-        {{ name }} 太高了不方便!
+        狀態屬性: Message is: {{ message }} <br />
+        狀態屬性: <input v-model="message"><br />
+        狀態屬性: 單價: {{ price }}, 數量: {{ quantity }}, 總金額共: {{ price * quantity }}<br />
+        動態改變屬性: {{ name }} 太高了不方便! <br>
+        <hr />
+        <p>方法屬性:總金額共{{ subtotal() }}元</p>
+        <p>方法屬性:ES6總金額共{{ subtotal_ES6() }}元</p>
+        <p>計算屬性:{{ subtotal_cp }}元</p>
+        <hr />
+        <p>1 日幣 = 0.278 台幣</p>
+        <div>台幣 <input type="text" v-model="twd" v-on:input="twd2jpy"></div>
+        <div>日幣 <input type="text" v-model="jpy" v-on:input="jpy2twd"></div>
+        <hr />
+        <p>假設, 1 日幣 = 0.278 台幣, 且 1 美金 = 28.540 台幣:</p>
+        <div>台幣 <input type="text" v-model="twd"></div>
+        <div>日幣 <input type="text" v-model="jpy_cp"></div>
+        <div>美金 <input type="text" v-model="usd_cp"></div>
+        <hr />
+        <p v-bind:id="customId">v-bind:id 綁定tag屬性 {{ customId }}</p>
+        <button v-bind:disabled="isBtnDisabled">click me!</button><br />
+        <button :disabled="isBtnDisabled">click me!</button>
+        <hr />
+        <div>
+            <input type="radio" id="one" value="1" v-model="picked">
+            <label for="one">One</label>
+            <br />
+            <input type="radio" id="two" value="2" v-model="picked">
+            <label for="two">Two</label>
+            <br />
+            <span>Picked: {{ picked }}</span>
+        </div>
+        <hr />
+        <div>
+            <!-- <input type="checkbox" id="selectAll" v-on:click="SelectAll()">
+            <label for="selectAll">SelectAll</label> -->
+            <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+            <label for="jack">Jack</label>
+            <input type="checkbox" id="john" value="John" v-model="checkedNames">
+            <label for="john">John</label>
+            <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+            <label for="mike">Mike</label>
+            <input type="checkbox" id="mary" value="Mary" v-model="checkedNames">
+            <label for="mary">Mary</label>
+            <br />
+            <p>Checked names: {{ checkedNames }}</p>
+            <br />
+            <input type="checkbox" id="checkbox" v-model="isChecked">
+            <label for="checkbox">Status: {{ isChecked}}</label>
+        </div>
+        <hr />
+        <div>
+            <select v-model="selected">
+                <option disabled value="">請選擇</option>
+                <option>台北市</option>
+                <option>新北市</option>
+                <option>基隆市</option>
+            </select>
+            Selected: {{ selected || '未選擇' }}
+        </div>
+        <hr />
+        <div>
+            <p>如要使v-model不要頻繁更新，可搭配使用修飾子(Modifiers)協助，與v-model搭配的有以下三種
+            <ul>
+                <li>".lazy"會將本來監聽的input事件調整為change事件</li>
+                <li>".number"會將輸入值於更新狀態時轉換為數字格式</li>
+                <li>".trim"會自動過濾前後的空白字元</li>
+            </ul>
+            </p>
+            <p>
+                <input v-model.lazy="msg1">
+                Message with ".lazy" : {{ msg1 }}
+            </p>
+            <p>
+                <input v-model.number="num1"> +
+                <input v-model.number="num2"> =
+                {{ sum }}
+            </p>
+            <p>
+                <input v-model.trim="msg2">
+                Message with ".trim" is: {{ msg2 }}
+            </p>
+        </div>
+        <hr />
+        <p v-pre>使用v-text="text"效果等同效果等同JS DOM API的innerHtml，以及直接使用{{text}}，但是Div原本的內容會被清除。</p>
+        <p>使用v-html="text"效果等同JS DOM API的innerHtml</p>
+        <p>使用v-once="text"效果只會在渲染指定的節點一次，往後不再更新</p>
+
+        Edit: <input type="text" v-model="text">
+        <div>
+            v-text:
+            <div class="text" v-text="text"></div>
+            v-html:
+            <div class="html" v-html="text"></div>
+            v-text with "v-once":
+            <div class="html" v-text="text" v-once></div>
+        </div>
+        <hr />
+
+        <div>
+            <p>使用v-pre指令使{{ text }}不再被指定為模板</p>
+        </div>
+        <hr />
+
+        <div>
+            <p>Vue.js與CSS樣式的綁定</p>
+            <!-- v-bind:class 也可簡寫為 :class -->
+            <input type="text" v-model.trim="message" v-bind:class="{ 'error' : message.length > 10}">
+        </div>
+        <hr />
+        <p>當isActive與hasError的狀態更新時，對應的Class也會依照它們的truthy或falsy狀態來進行更新。</p>
+        <div v-bind:class="{ active: isActive, 'text-danger': hasError}">
+            ...
+        </div>
     </div>
 </body>
 
 <footer>
     <script>
+        // 主要練習用實體
         const Instance = vm.mount('#app');
+        // 動態改變實體內狀態Data
         Instance.$data.name = '身高189.3cm'
+        // 使用template的實體
+        vm2.mount('#app2')
     </script>
 </footer>
 
