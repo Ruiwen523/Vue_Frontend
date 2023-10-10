@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <title>MyBlog</title>
+    <script src="https://unpkg.com/vue@3.3.4"></script>
+    <script src="index.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</header>
+
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <input v-model="message"><br/>
+        單價: {{ price }}, 數量: {{ quantity }}, 總金額共: {{ price * quantity }}<br />
+        {{ name }} 太高了不方便!
+    </div>
+</body>
+
+<footer>
+    <script>
+        const Instance = vm.mount('#app');
+        Instance.$data.name = '身高189.3cm'
+    </script>
+</footer>
+
+</html>
