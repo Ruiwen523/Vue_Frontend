@@ -9,6 +9,64 @@
             border: red solid 1px;
             color: red;
         }
+
+        body {
+            padding: 1rem;
+        }
+
+        .p {
+            margin-bottom: 1rem;
+            padding: 10px;
+            background-color: yellow;
+
+            div {
+                margin-bottom: 5px;
+            }
+        }
+
+        .app {
+            overflow: hidden;
+        }
+
+        .wrap {
+            float: left;
+            margin-right: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .outer {
+            cursor: pointer;
+            position: relative;
+            width: 150px;
+            height: 150px;
+            padding: 25px;
+            background-color: #ccc;
+            text-align: center;
+            margin-top: 1rem;
+
+            &:hover {
+                background-color: darken(#ccc, 10%);
+            }
+        }
+
+        .inner {
+            cursor: pointer;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            margin-left: -45px;
+            margin-top: -55px;
+            width: 90px;
+            height: 90px;
+            text-align: center;
+            line-height: 70px;
+            background-color: #f00;
+            color: #fff;
+
+            &:hover {
+                background-color: darken(#f00, 10%);
+            }
+        }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </header>
@@ -115,20 +173,56 @@
         <hr />
 
         <div>
-            <p>使用v-pre指令使{{ text }}不再被指定為模板</p>
+            <h3>使用v-pre指令使{{ text }}不再被指定為模板</h3>
         </div>
         <hr />
 
         <div>
-            <p>Vue.js與CSS樣式的綁定</p>
+            <h3>Vue.js與CSS樣式的綁定</h3>
             <!-- v-bind:class 也可簡寫為 :class -->
+            <p>當輸入文字不超過 10 個字時，輸入框維持預設樣式，超過 10 個字的時候，則樣式會變成紅框紅字。</p>
             <input type="text" v-model.trim="message" v-bind:class="{ 'error' : message.length > 10}">
         </div>
         <hr />
         <p>當isActive與hasError的狀態更新時，對應的Class也會依照它們的truthy或falsy狀態來進行更新。</p>
         <div v-bind:class="{ active: isActive, 'text-danger': hasError}">
-            ...
+            請打開開發人員工具點擊此段DIV標籤內的按鈕並觀察Class變化
+            <input type="button" v-on:click="ChangeIsActive" value="ChangeIsActive" />
+            <input type="button" v-on:click="ChangehasError" value="ChangehasError" />
         </div>
+        <hr />
+
+        <div>
+            <h3> Count: {{ count }}</h3>
+            <button v-on:click="alert('Hello!')">alert:Hello</button><br />
+            <button @click="plus">Plus</button>
+            <button @click="count++">++</button><br />
+            <button @click="plus2">Plus2</button>
+            <p>Amount: <input v-model.number="amount"></p>
+            <button @click="plus3(amount, $event)">Plus3</button>
+        </div>
+        <hr />
+
+        <div class="p" v-show="msg.length > 0">
+            <div v-for="m in msg">{{ m }}</div>
+        </div>
+
+        <div class="wrap">
+            click without stopPropagation
+            <div class="outer" @click="alert('Outer')">
+                <span>Outer</span>
+                <div class="inner" @click="alert('Inner')">Inner</div>
+            </div>
+        </div>
+
+        <div class="wrap">
+            click with stopPropagation
+            <div class="outer" @click="alert('Outer')">
+                <span>Outer</span>
+                <div class="inner" @click.stop="alert('Inner')">Inner</div>
+            </div>
+        </div>
+
     </div>
 </body>
 
