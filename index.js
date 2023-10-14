@@ -24,6 +24,9 @@ const vm = Vue.createApp({
       count: 0,
       amount: 50,
       msg: [],
+      pressKey: '',
+      msgKeyDown: '',
+      messages: [],
     };
   },
   // 方法屬性
@@ -64,6 +67,16 @@ const vm = Vue.createApp({
       console.log(event.target.tagName);
       this.count += amount;
     },
+    press(event) {
+      this.pressKey = event.key;
+      window.setTimeout(() => {
+        event.target.value = '';
+      }, 300);
+    },
+    addToMessages() {
+      this.messages.push(this.msgKeyDown);
+      this.msgKeyDown = '';
+    }
   },
   // 計算屬性
   computed: {

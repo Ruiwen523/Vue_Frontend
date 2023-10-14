@@ -1,0 +1,76 @@
+.error {
+  border: red solid 1px;
+  color: red;
+}
+
+body {
+  padding: 1rem;
+}
+
+.p {
+  
+  margin-bottom: 1rem;
+  padding: 10px;
+  background-color: yellow;
+
+  div {
+    margin-bottom: 5px;
+  }
+}
+
+.app {
+  overflow: hidden;
+}
+
+.wrap {
+  float: left;
+  margin-right: 3rem;
+  margin-bottom: 2rem;
+}
+
+.outer {
+  cursor: pointer;
+  position: relative;
+  width: 150px;
+  height: 150px;
+  padding: 25px;
+  background-color: #ccc;
+  text-align: center;
+  margin-top: 1rem;
+
+  &:hover {
+    background-color: darken(#ccc, 10%);
+  }
+}
+
+.inner {
+  cursor: pointer;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin-left: -45px;
+  margin-top: -55px;
+  width: 90px;
+  height: 90px;
+  text-align: center;
+  line-height: 70px;
+  background-color: #f00;
+  color: #fff;
+
+  &:hover {
+    background-color: darken(#f00, 10%);
+  }
+}
+
+.messages {
+  padding: 6px 10px;
+  width: 95%;
+  height: 100px;
+  margin-bottom: 1em;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+}
+
+input {
+  padding: 3px;
+}

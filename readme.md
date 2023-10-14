@@ -66,12 +66,41 @@ Vue-Froundend
   - 於更新狀態時自動去除前後空白字元
 
 
-## 事件通用修飾子
+## v-on 通用修飾子
 - .stop
   - 阻擋事件向外層冒泡傳遞
 - .prevent
   - 阻擋元素的預設事件(取消原事件)
+- caotyre
+  - 用來指定事件以捕獲 (capturing) 的形式來觸發
 - .self
+  - 只會觸發元素自己的事件行為，由子層元素傳遞來的事件則不會觸發
 - .once
+  - 讓指定的事件只會觸發一次
 - .passive
+  - 與`addEventListener`的`passive`屬性相同
+  - 用途是告訴瀏覽器這個事件處理器會不會呼叫`event.preventDefault`來停止原生行為
+
+> 一個指令可以同時加入多個修飾子，而修飾子的**順序會影響執行的結果**。  
+> 如`v-on:click.self.prevent`會先執行`self`然後執行`prevent`；換言之只會阻擋自己的行為。
+
+## 鍵盤修飾子
+
+- .key
+- .enter
+- .delete (包含`del`與`backspace`鍵)
+- .esc
+- .space
+- .up
+- .down
+- .left
+- .right
+- .ctrl
+- .alt
+- .shift
+- .meta
+  - 對應鍵盤Win鍵
+
+> 幾乎所有`event.key`在Vue.js都有對應的鍵盤修飾子  
+> 不過需要注意的是像`PageDown`這類名稱要轉換成連字號(kebab-case)`.page-down`來使用
 
