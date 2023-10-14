@@ -26,7 +26,11 @@ const vm = Vue.createApp({
       msg: [],
       pressKey: '',
       msgKeyDown: '',
+      msgKeyDown2: '',
+      msgKeyDown3: "",
       messages: [],
+      messages2: [],
+      messages3: ['1'],
     };
   },
   // 方法屬性
@@ -76,7 +80,15 @@ const vm = Vue.createApp({
     addToMessages() {
       this.messages.push(this.msgKeyDown);
       this.msgKeyDown = '';
-    }
+    },
+    addToMessages2() {
+      this.messages2.push(this.msgKeyDown2);
+      this.msgKeyDown2 = '';
+    },
+    addToMessages3() {
+      this.messages3.push(this.msgKeyDown3);
+      this.msgKeyDown3 = '';
+    }    
   },
   // 計算屬性
   computed: {
@@ -115,5 +127,5 @@ const vm2 = Vue.createApp({
     return {
       greeting: "Hello Vue.js!",
     };
-  },
+  }
 });

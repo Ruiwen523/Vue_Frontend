@@ -3,7 +3,7 @@
 <header>
     <title>MyBlog</title>
     <link href="index.css" rel="stylesheet">
-    <script src="https://unpkg.com/vue@3.3.4"></script>
+    <script src="https://unpkg.com/vue@3.3.4/dist/vue.global.js"></script>
     <script src="index.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </header>
@@ -11,6 +11,7 @@
 <body>
     <div id="app2"></div>
     <div id="app">
+        <h2>基礎操作屬性篇</h2>
         狀態屬性: Message is: {{ message }} <br />
         狀態屬性: <input v-model="message"><br />
         狀態屬性: 單價: {{ price }}, 數量: {{ quantity }}, 總金額共: {{ price * quantity }}<br />
@@ -20,19 +21,23 @@
         <p>方法屬性:ES6總金額共{{ subtotal_ES6() }}元</p>
         <p>計算屬性:{{ subtotal_cp }}元</p>
         <hr />
+        <h2>input()事件觸發臺日匯率轉換方法</h2>
         <p>1 日幣 = 0.278 台幣</p>
         <div>台幣 <input type="text" v-model="twd" v-on:input="twd2jpy"></div>
         <div>日幣 <input type="text" v-model="jpy" v-on:input="jpy2twd"></div>
         <hr />
+        <h2>計算屬性有Get/Set方法</h2>
         <p>假設, 1 日幣 = 0.278 台幣, 且 1 美金 = 28.540 台幣:</p>
         <div>台幣 <input type="text" v-model="twd"></div>
         <div>日幣 <input type="text" v-model="jpy_cp"></div>
         <div>美金 <input type="text" v-model="usd_cp"></div>
         <hr />
+        <h2>HTML標籤屬性使用v-bind:{屬性}來綁定</h2>
         <p v-bind:id="customId">v-bind:id 綁定tag屬性 {{ customId }}</p>
         <button v-bind:disabled="isBtnDisabled">click me!</button><br />
         <button :disabled="isBtnDisabled">click me!</button>
         <hr />
+        <h2>RadioBox的操作方式</h2>
         <div>
             <input type="radio" id="one" value="1" v-model="picked">
             <label for="one">One</label>
@@ -43,6 +48,7 @@
             <span>Picked: {{ picked }}</span>
         </div>
         <hr />
+        <h2>CheckBox的操作方式</h2>
         <div>
             <!-- <input type="checkbox" id="selectAll" v-on:click="SelectAll()">
             <label for="selectAll">SelectAll</label> -->
@@ -61,6 +67,7 @@
             <label for="checkbox">Status: {{ isChecked}}</label>
         </div>
         <hr />
+        <h2>Select的操作方式</h2>
         <div>
             <select v-model="selected">
                 <option disabled value="">請選擇</option>
@@ -71,14 +78,14 @@
             Selected: {{ selected || '未選擇' }}
         </div>
         <hr />
+        <h2>v-model修飾子(Modifiers)篇</h2>
         <div>
-            <p>如要使v-model不要頻繁更新，可搭配使用修飾子(Modifiers)協助，與v-model搭配的有以下三種
+            <h4>如要使v-model不要頻繁更新，可搭配使用修飾子(Modifiers)協助，與v-model搭配的有以下三種</h4>
             <ul>
                 <li>".lazy"會將本來監聽的input事件調整為change事件</li>
                 <li>".number"會將輸入值於更新狀態時轉換為數字格式</li>
                 <li>".trim"會自動過濾前後的空白字元</li>
             </ul>
-            </p>
             <p>
                 <input v-model.lazy="msg1">
                 Message with ".lazy" : {{ msg1 }}
@@ -86,7 +93,7 @@
             <p>
                 <input v-model.number="num1"> +
                 <input v-model.number="num2"> =
-                {{ sum }}
+                {{ sum }} 不會變成字串相+
             </p>
             <p>
                 <input v-model.trim="msg2">
@@ -94,28 +101,28 @@
             </p>
         </div>
         <hr />
-        <p v-pre>使用v-text="text"效果等同效果等同JS DOM API的innerHtml，以及直接使用{{text}}，但是Div原本的內容會被清除。</p>
-        <p>使用v-html="text"效果等同JS DOM API的innerHtml</p>
-        <p>使用v-once="text"效果只會在渲染指定的節點一次，往後不再更新</p>
-
-        Edit: <input type="text" v-model="text">
+        <h2>其他指令語法</h2>
+        <p>使用<b>v-text="text"</b>效果等同效果等同JS DOM API的innerText，以及直接使用{{text}}，但是Div原本的內容會被清除。</p>
+        <p>使用<b>v-html="text"</b>效果等同JS DOM API的innerHtml</p>
+        <p>使用<b>v-once="text"</b>效果只會在渲染指定的節點一次，往後不再更新</p>
+        <p v-pre>使用<b>v-pre</b>指令使{{ text }}不再被指定為模板語法</p>
+        
+        <h2> Edit: <input type="text" v-model="text"></h2>
         <div>
-            v-text:
-            <div class="text" v-text="text"></div>
-            v-html:
-            <div class="html" v-html="text"></div>
-            v-text with "v-once":
-            <div class="html" v-text="text" v-once></div>
+            v-text: <div class="text" v-text="text"></div>
+            <br />
+            v-html: <div class="html" v-html="text"></div>
+            <br />
+            v-text with "v-once": <div class="html" v-text="text" v-once></div>
+            <h4 v-pre>使用v-pre指令使{{ text }}不再被指定為模板</h4>
         </div>
         <hr />
 
         <div>
-            <h3>使用v-pre指令使{{ text }}不再被指定為模板</h3>
-        </div>
-        <hr />
+            <h3>Vue.js與CSS樣式的綁定
 
-        <div>
-            <h3>Vue.js與CSS樣式的綁定</h3>
+                v-model.trim="message" v-bind:class="{ 'error' : message.length > 10}"
+            </h3>
             <!-- v-bind:class 也可簡寫為 :class -->
             <p>當輸入文字不超過 10 個字時，輸入框維持預設樣式，超過 10 個字的時候，則樣式會變成紅框紅字。</p>
             <input type="text" v-model.trim="message" v-bind:class="{ 'error' : message.length > 10}">
@@ -191,21 +198,40 @@
             於輸入框輸入訊息後按下enter鍵觸發某個方法
             <div v-for="m in messages">{{ m }}</div>
         </div>
-        <input type="text" @keydown.enter="addToMessages" v-model.trim="msgKeyDown">
+        <input type="text" placeholder="輸入任意按鍵後按下enter" @keydown.enter="addToMessages" v-model.trim="msgKeyDown">
+
+
+        <div class="messages">
+            於輸入框輸入訊息後按下Ctrl + Enter 鍵與 單一按enter鍵觸發事件
+            <div v-for="m2 in messages2">{{ m2 }}</div>
+        </div>
+        <input type="text" 
+            placeholder="輸入任意文字後，試試同時按下 Ctrl + Enter 鍵與只按 Enter 的差異" 
+            @keydown.enter.exact="addToMessages2"
+            v-model.trim="msgKeyDown2" style="width:400px;" />
         <hr />
 
+        <h2>滑鼠修飾子</h2>
+        <div>
+            輸入文字後按下滑鼠左/中/右鍵
+            <input type="text" v-model.trim="msgKeyDown3"
+                @mousedown.left="addToMessages3" 
+                @mousedown.right="addToMessages3"
+                @mousedown.middle="addToMessages3"/>
+            Message3 with Mouse ".left、.right、.middle" : {{ messages3 }}
+        </div>
+        <hr />
+
+        <h2>v-if 對畫面的元素進行條件的控制</h2>
+        <div>
+            
+        </div>
+        <h2>v-show 對畫面的元素進行流程的控制</h2>
         <div>
 
         </div>
         <hr />
-        <div>
 
-        </div>
-        <hr />
-        <div>
-
-        </div>
-        <hr />
         <div>
 
         </div>
@@ -214,14 +240,14 @@
 </body>
 
 <footer>
-    <script>
-        // 主要練習用實體
-        const Instance = vm.mount('#app');
-        // 動態改變實體內狀態Data
-        Instance.$data.name = '身高189.3cm'
-        // 使用template的實體
-        vm2.mount('#app2')
-    </script>
+    
 </footer>
-
+<script>
+    // 主要練習用實體
+    const Instance = vm.mount('#app');
+    // 動態改變實體內狀態Data
+    Instance.$data.name = '身高189.3cm';
+    // 使用template的實體
+    vm2.mount('#app2')
+</script>
 </html>

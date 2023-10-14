@@ -87,20 +87,31 @@ Vue-Froundend
 ## 鍵盤修飾子
 
 - .key
-- .enter
-- .delete (包含`del`與`backspace`鍵)
-- .esc
-- .space
-- .up
-- .down
-- .left
-- .right
-- .ctrl
-- .alt
-- .shift
-- .meta
+  - 鍵入事件
+- .exact
+  - 用來精確判斷keydown的修飾子
+  - 精確到可單一按鍵才會觸發事件
+  - 通常被用來作為系統按鍵的各種組合熱鍵判斷使用。
+- .enter鍵
+  - 按下Enter觸發事件
+  - 多按鍵組合依舊會觸發事件
+- .delete鍵 (包含`del`與`backspace`鍵)
+- .esc鍵
+- .space鍵
+- .up鍵
+- .down鍵
+- .left鍵
+- .right鍵
+- .ctrl鍵
+- .alt鍵
+- .shift鍵
+- .meta鍵
   - 對應鍵盤Win鍵
 
 > 幾乎所有`event.key`在Vue.js都有對應的鍵盤修飾子  
 > 不過需要注意的是像`PageDown`這類名稱要轉換成連字號(kebab-case)`.page-down`來使用
 
+## 滑鼠修飾子
+- .left 左鍵
+- .right 右鍵
+- .middle 中鍵
